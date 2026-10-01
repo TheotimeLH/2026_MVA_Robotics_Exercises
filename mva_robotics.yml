@@ -1,0 +1,16 @@
+name: mva_robotics_2026
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - pinocchio=4.1.0
+  - meshcat-python
+  - example-robot-data
+  - example-robot-data-loaders
+  - jupyterlab
+  - ipywidgets
+  - matplotlib
+  - scipy
+  - pip

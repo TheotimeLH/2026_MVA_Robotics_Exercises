@@ -1,0 +1,14 @@
+for i in range(500):  
+    oMgoal_current = target_3D_trajectory[i]
+    pin.framesForwardKinematics(robot.model,robot.data,q)
+
+    oMtool = robot.data.oMf[IDX_TOOL]
+    o_Jtool3 = pin.computeFrameJacobian(robot.model,robot.data,q,IDX_TOOL,pin.LOCAL_WORLD_ALIGNED)[:3,:]
+    o_TG = oMtool.translation - oMgoal_current
+    viz.applyConfiguration('goal', pin.SE3(oMgoal.rotation, oMgoal_current))
+    vq = -100*pinv(o_Jtool3)@o_TG
+    q = pin.integrate(robot.model,q, vq * dt)
+    viz.display(q)
+    time.sleep(1e-2)
+
+    oMtool_translation_history.append(oMtool.translation.copy())
